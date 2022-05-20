@@ -1,0 +1,38 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red27\green27\blue27;\red255\green255\blue255;\red72\green71\blue187;
+\red0\green0\blue0;\red252\green244\blue220;\red202\green202\blue202;\red115\green138\blue4;\red129\green144\blue144;
+\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c14118\c14118\c14118;\cssrgb\c100000\c100000\c100000;\cssrgb\c35686\c37255\c78039;
+\cssrgb\c0\c0\c0;\cssrgb\c99216\c96471\c89020;\cssrgb\c83137\c83137\c83137;\cssrgb\c52157\c60000\c0;\cssrgb\c57647\c63137\c63137;
+\cssrgb\c100000\c100000\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 CSV\'a0WITH\'a0HEADERS\'a0FROM\'a0"{\field{\*\fldinst{HYPERLINK "https://raw.githubusercontent.com/Sagacious007/Big-Data/main/chat_leave_team_chat.csv%22"}}{\fldrslt \cf4 \strokec4 https://raw.githubusercontent.com/Sagacious007/Big-Data/main/chat_leave_team_chat.csv"}}\'a0AS\'a0line\
+MERGE\'a0(n:ChatSession\'a0\{Name:line.user_id\})\
+MERGE\'a0(m:ChatSession\'a0\{Name:line.teamchat_session_id\})\
+MERGE\'a0(m)\'a0-[:LEAVES\'a0\{leaves:line.leaves\}]->\'a0(n)\
+\pard\pardeftab720\partightenfactor0
+\cf5 \strokec6 \
+\
+//Counting the number of edges\strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \strokec8 match\strokec6  \strokec9 (\strokec6 n\strokec9 :\strokec6 ChatSession\strokec9 )-[\strokec6 r\strokec9 ]->()\strokec7 \
+\strokec8 return\strokec6  \strokec8 count\strokec9 (\strokec6 r\strokec9 )\strokec7 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \strokec6 //Counting the number of nodes\strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \strokec8 match\strokec6  \strokec9 (\strokec6 n\strokec9 :\strokec6 ChatSession\strokec9 )\strokec7 \
+\strokec8 return\strokec6  \strokec8 count\strokec9 (\strokec6 n\strokec9 )\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb10 \strokec2 //Finding root nodes:\
+match (m)-[r:CHAT]->(n:UserChats)\
+where not (()-->(m))\
+return m
+\fs24 \cf7 \cb1 \strokec7 \
+}
